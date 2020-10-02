@@ -100,6 +100,77 @@ class App extends React.Component {
 }
 
 /*
+Template for methods on lines 41 & 46
+
+import React from 'react';
+import Profile from './Profile';
+import ProfileForm from './ProfileForm';
+class App extends React.Component{
+  state = {
+    profiles : [{
+      name : "Alex",
+      id : "123",
+      role : "student"
+    },
+    {
+      name : "Roger",
+      id : "456",
+      role : "mentor"
+    },
+    {
+      name : "Martha",
+      id : "789",
+      role : "manager"
+    }],
+    filter : "none"
+  }
+  handleAddProfile = ( event ) => {
+    event.preventDefault();
+    const profileName = event.target.profileName.value;
+    const profileId = event.target.profileId.value;
+    this.setState({
+      profiles : [...this.state.profiles, {name : profileName, id : profileId}]
+    })
+  }
+  changeRole = (event) => {
+    const currentRole = event.target.value;
+    this.setState({
+      filter : currentRole
+    });
+  }
+  render(){
+    const filteredProfiles = this.state.profiles.filter( ( profile, index ) => {
+      if( profile.role === this.state.filter || this.state.filter === "none" ){
+        return profile
+      }
+    });
+    return(
+      <div>
+        <select onChange={(event)=>this.changeRole(event)}>
+          <option value="none">
+            Please select an option
+          </option>
+          <option value="mentor">
+            Mentor
+          </option>
+          <option value="student">
+            Student
+          </option>
+          <option value="manager">
+            Manager
+          </option>
+        </select>
+        {
+          filteredProfiles.map( ( profile, index ) => {
+            return ( <Profile profile={profile} key={index} />)
+          })
+        }
+        <ProfileForm handleAddProfile={this.handleAddProfile} />
+      </div>
+    )
+  }
+}
+export default App;
 
 Initialize what to expect in state
 
